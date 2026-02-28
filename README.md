@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-A comprehensive Model Context Protocol (MCP) server for Zabbix integration using FastMCP and python-zabbix-utils. This server provides complete access to Zabbix API functionality through MCP-compatible tools.
+A comprehensive Model Context Protocol (MCP) server for Zabbix integration using FastMCP and python-zabbix-utils. This server provides **216 tools** covering the full Zabbix API across **57 object types**.
 
 <a href="https://glama.ai/mcp/servers/@mpeirone/zabbix-mcp-server">
   <img width="380" height="200" src="https://glama.ai/mcp/servers/@mpeirone/zabbix-mcp-server/badge" alt="zabbix-mcp-server MCP server" />
@@ -11,69 +11,221 @@ A comprehensive Model Context Protocol (MCP) server for Zabbix integration using
 
 ## Features
 
-### 🏠 Host Management
+All tools support an `extra_params` argument for passing any additional Zabbix API parameters not in the explicit signature.
+
+### Host Management
 - `host_get` - Retrieve hosts with advanced filtering
 - `host_create` - Create new hosts with interfaces and templates
 - `host_update` - Update existing host configurations
 - `host_delete` - Remove hosts from monitoring
+- `host_massadd` - Mass add groups, templates, macros, or interfaces to hosts
+- `host_massremove` - Mass remove groups, templates, or macros from hosts
+- `host_massupdate` - Mass update hosts with the same properties
 
-### 👥 Host Group Management
+### Host Group Management
 - `hostgroup_get` - Retrieve host groups
 - `hostgroup_create` - Create new host groups
 - `hostgroup_update` - Modify existing host groups
 - `hostgroup_delete` - Remove host groups
+- `hostgroup_massadd` - Mass add hosts or templates to groups
+- `hostgroup_massremove` - Mass remove hosts or templates from groups
+- `hostgroup_massupdate` - Mass update (replace) hosts/templates in groups
+- `hostgroup_propagate` - Propagate permissions and tag filters to child groups
 
-### 📊 Item Management
+### Host Interface Management
+- `hostinterface_get` - Retrieve host interfaces
+- `hostinterface_create` - Create new host interfaces
+- `hostinterface_update` - Update host interfaces
+- `hostinterface_delete` - Remove host interfaces
+- `hostinterface_massadd` - Mass add interfaces to hosts
+- `hostinterface_massremove` - Mass remove interfaces from hosts
+- `hostinterface_replacehostinterfaces` - Replace all interfaces on a host
+
+### Item Management
 - `item_get` - Retrieve monitoring items with filtering
 - `item_create` - Create new monitoring items
 - `item_update` - Update existing items
 - `item_delete` - Remove monitoring items
 
-### ⚠️ Trigger Management
+### Trigger Management
 - `trigger_get` - Retrieve triggers and alerts
 - `trigger_create` - Create new triggers
 - `trigger_update` - Modify existing triggers
 - `trigger_delete` - Remove triggers
 
-### 📋 Template Management
+### Template Management
 - `template_get` - Retrieve monitoring templates
 - `template_create` - Create new templates
 - `template_update` - Update existing templates
 - `template_delete` - Remove templates
+- `template_massadd` - Mass add groups, hosts, or macros to templates
+- `template_massremove` - Mass remove groups, hosts, or macros from templates
+- `template_massupdate` - Mass update templates
 
-### 🚨 Problem & Event Management
+### Template Group Management
+- `templategroup_get` - Retrieve template groups
+- `templategroup_create` - Create template groups
+- `templategroup_update` - Update template groups
+- `templategroup_delete` - Remove template groups
+- `templategroup_massadd` - Mass add templates to groups
+- `templategroup_massremove` - Mass remove templates from groups
+- `templategroup_massupdate` - Mass update template groups
+- `templategroup_propagate` - Propagate permissions to child groups
+
+### Problem & Event Management
 - `problem_get` - Retrieve current problems and issues
 - `event_get` - Get historical events
 - `event_acknowledge` - Acknowledge events and problems
 
-### 📈 Data Retrieval
+### Data Retrieval
 - `history_get` - Access historical monitoring data
+- `history_clear` - Clear history data for items
+- `history_push` - Push history data to Zabbix
 - `trend_get` - Retrieve trend data and statistics
 
-### 👤 User Management
+### User Management
 - `user_get` - Retrieve user accounts
 - `user_create` - Create new users
 - `user_update` - Update user information
 - `user_delete` - Remove user accounts
+- `user_checkauthentication` - Check or validate a user session
+- `user_unblock` - Unblock users blocked by failed login attempts
 
-### 🔗 Proxy Management
+### User Group Management
+- `usergroup_get` - Retrieve user groups
+- `usergroup_create` - Create user groups
+- `usergroup_update` - Update user groups
+- `usergroup_delete` - Remove user groups
+
+### User Directory Management
+- `userdirectory_get` - Retrieve user directories (LDAP/SAML)
+- `userdirectory_create` - Create user directories
+- `userdirectory_update` - Update user directories
+- `userdirectory_delete` - Remove user directories
+- `userdirectory_test` - Test a user directory configuration
+
+### Role Management
+- `role_get` - Retrieve roles
+- `role_create` - Create roles
+- `role_update` - Update roles
+- `role_delete` - Remove roles
+
+### Token Management
+- `token_get` - Retrieve API tokens
+- `token_create` - Create API tokens
+- `token_update` - Update API tokens
+- `token_delete` - Remove API tokens
+- `token_generate` - Generate (regenerate) auth strings for tokens
+
+### Proxy Management
 - `proxy_get` - Retrieve Zabbix proxies with filtering
 - `proxy_create` - Create new proxies
 - `proxy_update` - Update existing proxies
 - `proxy_delete` - Remove proxies
 
-### 🔧 Maintenance Management
+### Proxy Group Management
+- `proxygroup_get` - Retrieve proxy groups
+- `proxygroup_create` - Create proxy groups
+- `proxygroup_update` - Update proxy groups
+- `proxygroup_delete` - Remove proxy groups
+
+### Maintenance Management
 - `maintenance_get` - Retrieve maintenance periods
 - `maintenance_create` - Schedule maintenance windows
 - `maintenance_update` - Modify maintenance periods
 - `maintenance_delete` - Remove maintenance schedules
 
-### 📊 Additional Features
+### Graph Management
 - `graph_get` - Retrieve graph configurations
-- `discoveryrule_get` - Get discovery rules
-- `itemprototype_get` - Retrieve item prototypes
+- `graph_create` - Create graphs
+- `graph_update` - Update graphs
+- `graph_delete` - Remove graphs
+- `graphitem_get` - Retrieve graph items
+
+### LLD (Low-Level Discovery) Rules
+- `discoveryrule_get` - Get LLD rules
+- `discoveryrule_create` - Create LLD rules
+- `discoveryrule_update` - Update LLD rules
+- `discoveryrule_delete` - Remove LLD rules
+
+### LLD Prototypes
+- `itemprototype_get` / `create` / `update` / `delete` - Item prototypes
+- `triggerprototype_get` / `create` / `update` / `delete` - Trigger prototypes
+- `graphprototype_get` / `create` / `update` / `delete` - Graph prototypes
+- `hostprototype_get` / `create` / `update` / `delete` - Host prototypes
+
+### Network Discovery
+- `drule_get` / `create` / `update` / `delete` - Network discovery rules
+- `dcheck_get` - Discovery checks
+- `dhost_get` - Discovered hosts
+- `dservice_get` - Discovered services
+
+### Action & Alert Management
+- `action_get` / `create` / `update` / `delete` - Actions
+- `alert_get` - Alerts
+- `mediatype_get` / `create` / `update` / `delete` - Media types
+
+### Script Management
+- `script_get` / `create` / `update` / `delete` - Scripts
+- `script_execute` - Execute a script on a host or event
+- `script_getscriptsbyhosts` - Get scripts available on hosts
+- `script_getscriptsbyevents` - Get scripts available for events
+
+### Service & SLA Management
+- `service_get` / `create` / `update` / `delete` - Services
+- `sla_get` / `create` / `update` / `delete` - SLAs
+- `sla_getsli` - Get SLI (Service Level Indicator) data
+
+### Dashboard Management
+- `dashboard_get` / `create` / `update` / `delete` - Dashboards
+- `templatedashboard_get` / `create` / `update` / `delete` - Template dashboards
+
+### Web Scenario Management
+- `httptest_get` / `create` / `update` / `delete` - Web scenarios
+
+### Correlation Management
+- `correlation_get` / `create` / `update` / `delete` - Event correlations
+
+### User Macro Management
+- `usermacro_get` - Retrieve user macros
+- `usermacro_create` / `update` / `delete` - Host macros
+- `usermacro_createglobal` / `updateglobal` / `deleteglobal` - Global macros
+
+### Value Map Management
+- `valuemap_get` / `create` / `update` / `delete` - Value maps
+
+### Map Management
+- `map_get` / `create` / `update` / `delete` - Network maps
+
+### Configuration Management
 - `configuration_export` - Export Zabbix configurations
 - `configuration_import` - Import configurations
+- `configuration_importcompare` - Compare import data with current config
+
+### Report Management
+- `report_get` / `create` / `update` / `delete` - Scheduled reports
+
+### Administration
+- `autoregistration_get` / `update` - Autoregistration settings
+- `authentication_get` / `update` - Authentication settings
+- `settings_get` / `update` - Global settings
+- `housekeeping_get` / `update` - Housekeeping settings
+- `auditlog_get` - Audit log entries
+- `hanode_get` - HA cluster nodes
+- `task_get` / `create` - Tasks (check now, diagnostics)
+
+### Image & Icon Management
+- `image_get` / `create` / `update` / `delete` - Images
+- `iconmap_get` / `create` / `update` / `delete` - Icon maps
+
+### Module & Connector Management
+- `module_get` / `create` / `update` / `delete` - Modules
+- `connector_get` / `create` / `update` / `delete` - Connectors
+
+### Regular Expression Management
+- `regexp_get` / `create` / `update` / `delete` - Regular expressions
+
+### System Info
 - `apiinfo_version` - Get API version information
 
 ## Installation
@@ -178,7 +330,12 @@ AUTH_TYPE=no-auth
 
 ### Testing
 
-**Run test suite:**
+**Run unit tests:**
+```bash
+uv run pytest tests/ -v
+```
+
+**Run integration smoke tests:**
 ```bash
 uv run python scripts/test_server.py
 ```
@@ -187,10 +344,10 @@ uv run python scripts/test_server.py
 
 When `READ_ONLY=true`, the server will only expose GET operations (retrieve data) and block all create, update, and delete operations. This is useful for:
 
-- 📊 Monitoring dashboards
-- 🔍 Read-only integrations
-- 🔒 Security-conscious environments
-- 🛡️ Preventing accidental modifications
+- Monitoring dashboards
+- Read-only integrations
+- Security-conscious environments
+- Preventing accidental modifications
 
 ### Example Tool Calls
 
@@ -202,6 +359,11 @@ host_get()
 **Get hosts in specific group:**
 ```python
 host_get(groupids=["1"])
+```
+
+**Get hosts with extra API parameters:**
+```python
+host_get(extra_params={"selectInterfaces": "extend", "selectGroups": "extend"})
 ```
 
 **Create a new host:**
@@ -234,18 +396,19 @@ history_get(
 )
 ```
 
-**Get all proxies:**
+**Create a host macro:**
 ```python
-proxy_get()
+usermacro_create(hostid="1", macro="{$MY_MACRO}", value="secret", type=1)
 ```
 
-**Create a new active proxy:**
+**Get SLI data for an SLA:**
 ```python
-proxy_create(
-    host="proxy-01",
-    status=5,
-    description="Main datacenter proxy"
-)
+sla_getsli(slaid="1", period_from=1704067200, period_to=1706745600)
+```
+
+**Execute a script on a host:**
+```python
+script_execute(scriptid="1", hostid="2")
 ```
 
 ## MCP Integration
@@ -280,23 +443,48 @@ docker build -t zabbix-mcp-server .
 ```
 zabbix-mcp-server/
 ├── src/
-│   └── zabbix_mcp_server.py    # Main server implementation
+│   ├── __init__.py                # Package metadata
+│   ├── _core.py                   # FastMCP instance, client management, utilities
+│   ├── zabbix_mcp_server.py       # Slim entrypoint with backward-compat re-exports
+│   └── tools/
+│       ├── __init__.py            # Imports all tool modules to register them
+│       ├── _registry.py           # Helper functions (build_params, zabbix_get/write/delete)
+│       ├── host.py                # Host management tools
+│       ├── hostgroup.py           # Host group management tools
+│       ├── item.py                # Item management tools
+│       ├── trigger.py             # Trigger management tools
+│       ├── template.py            # Template management tools
+│       └── ...                    # 57 tool modules total (one per API object type)
+├── tests/
+│   ├── conftest.py                # Shared fixtures (mock client, env vars)
+│   ├── test_core.py               # Tests for _core module
+│   ├── test_registry.py           # Tests for _registry helpers
+│   └── test_tools.py              # Tests for tool functions
 ├── scripts/
-│   ├── start_server.py         # Startup script with validation
-│   └── test_server.py          # Test script
+│   ├── start_server.py            # Startup script with validation
+│   └── test_server.py             # Integration smoke tests
 ├── config/
-│   ├── .env.example           # Environment configuration template
-│   └── mcp.json               # MCP client configuration example
-├── pyproject.toml             # Python project configuration
-├── requirements.txt           # Dependencies
-├── Dockerfile                 # Docker configuration
-├── docker-compose.yml         # Docker Compose setup
-├── README.md                  # This file
-├── MCP_SETUP.md              # MCP integration guide
-├── CONTRIBUTING.md           # Contribution guidelines
-├── CHANGELOG.md              # Version history
-└── LICENSE                   # MIT license
+│   ├── .env.example               # Environment configuration template
+│   └── mcp.json                   # MCP client configuration example
+├── pyproject.toml                 # Python project configuration
+├── requirements.txt               # Dependencies
+├── Dockerfile                     # Docker configuration
+├── docker-compose.yml             # Docker Compose setup
+├── README.md                      # This file
+├── MCP_SETUP.md                   # MCP integration guide
+├── CONTRIBUTING.md                # Contribution guidelines
+├── CHANGELOG.md                   # Version history
+└── LICENSE                        # MIT license
 ```
+
+### Architecture
+
+The server uses a modular architecture:
+
+- **`_core.py`** holds the shared FastMCP instance, Zabbix client management, and utility functions (`format_response`, `validate_read_only`, `get_transport_config`)
+- **`tools/_registry.py`** provides helper functions (`build_params`, `zabbix_get`, `zabbix_write`, `zabbix_delete`) that reduce per-tool boilerplate
+- **`tools/<object>.py`** modules each define tools for one Zabbix API object type using `@mcp.tool()` decorators
+- **`zabbix_mcp_server.py`** is a slim entrypoint that re-exports core objects and imports all tool modules
 
 ### Contributing
 
@@ -309,7 +497,13 @@ zabbix-mcp-server/
 ### Running Tests
 
 ```bash
-# Test server functionality
+# Unit tests
+uv run pytest tests/ -v
+
+# Unit tests with coverage
+uv run pytest tests/ --cov=src --cov-report=term-missing
+
+# Integration smoke tests (requires Zabbix connection)
 uv run python scripts/test_server.py
 
 # Test with Docker
@@ -320,20 +514,20 @@ docker-compose exec zabbix-mcp python scripts/test_server.py
 
 The server includes comprehensive error handling:
 
-- ✅ Authentication errors are clearly reported
-- 🔒 Read-only mode violations are blocked with descriptive messages
-- ✔️ Invalid parameters are validated
-- 🌐 Network and API errors are properly formatted
-- 📝 Detailed logging for troubleshooting
+- Authentication errors are clearly reported
+- Read-only mode violations are blocked with descriptive messages
+- Invalid parameters are validated
+- Network and API errors are properly formatted
+- Detailed logging for troubleshooting
 
 ## Security Considerations
 
-- 🔑 Use API tokens instead of username/password when possible
-- 🔒 Enable read-only mode for monitoring-only use cases
-- 🛡️ Secure your environment variables
-- 🔐 Use HTTPS for Zabbix server connections
-- 🔄 Regularly rotate API tokens
-- 📁 Store configuration files securely
+- Use API tokens instead of username/password when possible
+- Enable read-only mode for monitoring-only use cases
+- Secure your environment variables
+- Use HTTPS for Zabbix server connections
+- Regularly rotate API tokens
+- Store configuration files securely
 
 ## Troubleshooting
 
@@ -377,10 +571,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- 📖 [Documentation](README.md)
-- 🐛 [Issue Tracker](https://github.com/mpeirone/zabbix-mcp-server/issues)
-- 💬 [Discussions](https://github.com/mpeirone/zabbix-mcp-server/discussions)
+- [Documentation](README.md)
+- [Issue Tracker](https://github.com/mpeirone/zabbix-mcp-server/issues)
+- [Discussions](https://github.com/mpeirone/zabbix-mcp-server/discussions)
 
 ---
 
-**Made with ❤️ for the Zabbix and MCP communities**
+**Made with care for the Zabbix and MCP communities**
