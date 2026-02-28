@@ -565,6 +565,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
+This project is a fork of [mpeirone/zabbix-mcp-server](https://github.com/mpeirone/zabbix-mcp-server) by [@mpeirone](https://github.com/mpeirone). Thank you for creating the original project and laying the groundwork for Zabbix MCP integration.
+
 - [Zabbix](https://www.zabbix.com/) for the monitoring platform
 - [Model Context Protocol](https://modelcontextprotocol.io/) for the integration standard
 - [FastMCP](https://github.com/jlowin/fastmcp) for the server framework
