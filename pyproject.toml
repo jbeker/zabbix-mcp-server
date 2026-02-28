@@ -29,6 +29,12 @@ dependencies = [
 ]
 requires-python = ">=3.10"
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
 [project.urls]
 Homepage = "https://github.com/mpeirone/zabbix-mcp-server"
 Repository = "https://github.com/mpeirone/zabbix-mcp-server"
