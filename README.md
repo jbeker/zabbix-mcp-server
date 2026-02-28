@@ -5,8 +5,8 @@
 
 A comprehensive Model Context Protocol (MCP) server for Zabbix integration using FastMCP and python-zabbix-utils. This server provides **216 tools** covering the full Zabbix API across **57 object types**.
 
-<a href="https://glama.ai/mcp/servers/@mpeirone/zabbix-mcp-server">
-  <img width="380" height="200" src="https://glama.ai/mcp/servers/@mpeirone/zabbix-mcp-server/badge" alt="zabbix-mcp-server MCP server" />
+<a href="https://glama.ai/mcp/servers/@jbeker/zabbix-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@jbeker/zabbix-mcp-server/badge" alt="zabbix-mcp-server MCP server" />
 </a>
 
 ## Features
@@ -240,7 +240,7 @@ All tools support an `extra_params` argument for passing any additional Zabbix A
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/mpeirone/zabbix-mcp-server.git
+   git clone https://github.com/jbeker/zabbix-mcp-server.git
    cd zabbix-mcp-server
    ```
 
@@ -572,8 +572,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Support
 
 - [Documentation](README.md)
-- [Issue Tracker](https://github.com/mpeirone/zabbix-mcp-server/issues)
-- [Discussions](https://github.com/mpeirone/zabbix-mcp-server/discussions)
+- [Issue Tracker](https://github.com/jbeker/zabbix-mcp-server/issues)
+- [Discussions](https://github.com/jbeker/zabbix-mcp-server/discussions)
 
 ---
 

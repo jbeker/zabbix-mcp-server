@@ -41,7 +41,7 @@ This project adheres to a code of conduct that we expect all contributors to fol
 1. **Fork the repository** on GitHub
 2. **Clone your fork:**
    ```bash
-   git clone https://github.com/mpeirone/zabbix-mcp-server.git
+   git clone https://github.com/jbeker/zabbix-mcp-server.git
    cd zabbix-mcp-server
    ```
 3. **Install dependencies:**
