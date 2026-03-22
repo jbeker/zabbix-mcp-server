@@ -74,12 +74,23 @@ def get_zabbix_client() -> ZabbixAPI:
     return zabbix_api
 
 
+_read_only: Optional[bool] = None
+
+
+def set_read_only(value: bool) -> None:
+    """Set read-only mode explicitly (from CLI flag)."""
+    global _read_only
+    _read_only = value
+
+
 def is_read_only() -> bool:
     """Check if server is in read-only mode.
 
     Returns:
         bool: True if read-only mode is enabled
     """
+    if _read_only is not None:
+        return _read_only
     return os.getenv("READ_ONLY", "true").lower() in ("true", "1", "yes")
 
 
@@ -105,35 +116,3 @@ def validate_read_only() -> None:
         raise ValueError("Server is in read-only mode - write operations are not allowed")
 
 
-def get_transport_config() -> dict:
-    """Get transport configuration from environment variables.
-
-    Returns:
-        dict: Transport configuration
-
-    Raises:
-        ValueError: If invalid transport configuration
-    """
-    transport = os.getenv("ZABBIX_MCP_TRANSPORT", "stdio").lower()
-
-    if transport not in ["stdio", "streamable-http"]:
-        raise ValueError(f"Invalid ZABBIX_MCP_TRANSPORT: {transport}. Must be 'stdio' or 'streamable-http'")
-
-    config: dict[str, Any] = {"transport": transport}
-
-    if transport == "streamable-http":
-        # Check AUTH_TYPE requirement
-        auth_type = os.getenv("AUTH_TYPE", "").lower()
-        if auth_type != "no-auth":
-            raise ValueError("AUTH_TYPE must be set to 'no-auth' when using streamable-http transport")
-
-        # Get HTTP configuration with defaults
-        config.update({
-            "host": os.getenv("ZABBIX_MCP_HOST", "127.0.0.1"),
-            "port": int(os.getenv("ZABBIX_MCP_PORT", "8002")),
-            "stateless_http": os.getenv("ZABBIX_MCP_STATELESS_HTTP", "false").lower() in ("true", "1", "yes")
-        })
-
-        logger.info(f"HTTP transport configured: {config['host']}:{config['port']}, stateless_http={config['stateless_http']}")
-
-    return config
