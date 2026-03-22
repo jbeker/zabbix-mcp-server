@@ -130,7 +130,7 @@ def get_transport_config() -> dict:
         # Get HTTP configuration with defaults
         config.update({
             "host": os.getenv("ZABBIX_MCP_HOST", "127.0.0.1"),
-            "port": int(os.getenv("ZABBIX_MCP_PORT", "8000")),
+            "port": int(os.getenv("ZABBIX_MCP_PORT", "8002")),
             "stateless_http": os.getenv("ZABBIX_MCP_STATELESS_HTTP", "false").lower() in ("true", "1", "yes")
         })
 
